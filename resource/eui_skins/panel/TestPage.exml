@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="panel.TestPageSkin" width="580" height="985" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Component anchorOffsetX="0" anchorOffsetY="0" left="0" right="0" top="19" bottom="0" skinName="skins.PanelSkin"/>
+	<e:Image source="BankAD_Double" anchorOffsetX="0" anchorOffsetY="0" height="131" left="6" right="5" top="70"/>
+	<e:Scroller bottom="88" top="230" left="6" right="6" anchorOffsetY="0">
+		<e:List anchorOffsetY="0" height="664">
+			<e:ArrayCollection>
+				<e:Array>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+					<e:Object null=""/>
+				</e:Array>
+			</e:ArrayCollection>
+			<e:layout>
+				<e:VerticalLayout horizontalAlign="justify" verticalAlign="top" gap="0"/>
+			</e:layout>
+		</e:List>
+	</e:Scroller>
+</e:Skin>
