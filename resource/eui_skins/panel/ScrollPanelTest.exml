@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="panel.ScrollPanelTestSkin" width="750" height="985" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
-	<ns1:UIScrollView id="comScroll" left="0" right="0">
-	</ns1:UIScrollView>
+<e:Skin class="panel.ScrollPanelTestSkin" width="576" height="860" xmlns:e="http://ns.egret.com/eui" xmlns:ns1="*" xmlns:w="http://ns.egret.com/wing">
+	<e:Component id="titlePanelWithCloseButton" anchorOffsetX="0" anchorOffsetY="0" top="0" bottom="-18" left="0" right="0" height="100"/>
+	<e:Label text="&amp;" horizontalCenter="0" fontFamily="Saira SemiCondensed" size="28" verticalAlign="middle" textAlign="center" bottom="190.66999999999996" textColor="0x4e72b2" visible="false"/>
+	<e:Rect anchorOffsetX="0" anchorOffsetY="0" left="10" right="10" top="506" bottom="231.66999999999996" visible="false"/>
+	<e:Group id="zz1" left="21" right="19" anchorOffsetY="0" bottom="57.66999999999996" height="185">
+		<e:Group id="zzzzzz0" x="24" y="0" scaleX="1" scaleY="1">
+		<e:Label id="name0" text="attributeText" horizontalCenter="0" top="0" size="28" verticalAlign="middle" textAlign="center" textColor="0xffffff"/>
+		<e:List id="attributeList0" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="49" bottom="-25">
+			<e:layout>
+			<e:VerticalLayout horizontalAlign="justify" verticalAlign="middle" gap="6"/>
+			</e:layout>
+			<e:ArrayCollection>
+				<e:Array>
+					<e:Object zx="null"/>
+					<e:Object zx="null"/>
+					<e:Object zx="null"/>
+					<e:Object zx="null"/>
+				</e:Array>
+			</e:ArrayCollection>
+		</e:List>
+		<e:layout>
+			<e:VerticalLayout horizontalAlign="justify"/>
+		</e:layout>
+		</e:Group>
+		<e:Group id="zzzzzz2" anchorOffsetY="0" x="428" y="0" scaleX="1" scaleY="1">
+		<e:Label id="name1" text="attributeText" horizontalCenter="0" top="0" size="28" verticalAlign="middle" textAlign="center" textColor="0xffffff"/>
+		<e:List id="attributeList1" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="0" bottom="20.069999999999993">
+			<e:layout>
+			<e:VerticalLayout horizontalAlign="justify" verticalAlign="middle" gap="6"/>
+			</e:layout>
+			<e:ArrayCollection>
+				<e:Array>
+					<e:Object zxc="null"/>
+					<e:Object zxc="null"/>
+					<e:Object zxc="null"/>
+					<e:Object zxc="null"/>
+				</e:Array>
+			</e:ArrayCollection>
+		</e:List>
+		<e:layout>
+			<e:VerticalLayout horizontalAlign="justify"/>
+		</e:layout>
+		</e:Group>
+		<e:layout>
+		<e:HorizontalLayout horizontalAlign="justify" verticalAlign="top" gap="2"/>
+		</e:layout>
+	</e:Group>
+	<e:Group id="groupScroll" left="10" right="10" top="80" bottom="257" anchorOffsetY="0">
+		<e:Image source="FactionCopBack" left="0" right="0" top="0" bottom="0"/>
+		<e:Group bottom="15" left="20" right="20">
+			<e:Button id="refresh" label="Refreash" anchorOffsetX="0" width="128.13" anchorOffsetY="0" height="51" x="194" y="0"/>
+			<e:Button id="next" label="Button" anchorOffsetX="0" anchorOffsetY="0" x="468" y="3"/>
+			<e:Button id="last" label="Button" anchorOffsetX="0" anchorOffsetY="0" x="0" y="3"/>
+			<e:Label id="timeLabel" text="Label" size="22" fontFamily="Saira SemiCondensed" textColor="0xbcbcbc" x="240.67" y="48.33"/>
+		</e:Group>
+		<e:Group id="emptyGroup" horizontalCenter="0" verticalCenter="-43" scaleX="0.8" scaleY="0.8" visible="false">
+			<e:Label text="noVassalCooprateText" scaleX="1" scaleY="1" horizontalCenter="0" verticalCenter="0" size="35"/>
+		</e:Group>
+		<ns1:UIScrollView id="comScroll" left="0" right="0">
+		</ns1:UIScrollView>
+	</e:Group>
+	<e:Button id="confirm" label="cooprateText" anchorOffsetX="0" width="222.55" anchorOffsetY="0" height="50.82" horizontalCenter="0" bottom="0"/>
 </e:Skin>

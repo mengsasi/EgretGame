@@ -151,6 +151,7 @@ class UIScrollView extends UIView {
 			let posX = event.stageX;
 			let offsetX = posX - this.touchPositionX;
 			if (Math.abs(offsetX) > scrollHDetectionDistance) {
+				egret.Tween.removeTweens(this);
 				this.checkScroll = true;
 			}
 		}
@@ -191,7 +192,15 @@ class UIScrollView extends UIView {
 
 	private onScrollEnd(event) {
 		if (this.isScroll) {
-			this.scrollToPos(event);
+			if (!this.$stage) {
+				return;
+			}
+			let posX = event.stageX;
+			let offset = posX - this.touchPositionX;
+			let dir = offset > 0 ? 'right' : 'left';
+			let move: boolean = Math.abs(offset) > turnPageDistance;
+
+			this.scrollToPos(dir, move);
 			this.isScroll = false;
 		}
 	}
@@ -240,11 +249,11 @@ class UIScrollView extends UIView {
 	private tweenScroll: egret.Tween;
 	private containerPosX: number;
 
-	private scrollToPos(event) {
+	private scrollToPos(dir: string, move: boolean, offset: boolean = false) {
 		if (!this.$stage) {
 			return;
 		}
-		let finalPos = this.findFinalPosition(event);
+		let finalPos = this.moveTo(dir, move, offset);
 		let scroll = this;
 		this.containerPosX = this.container.x;
 		this.tweenScroll = egret.Tween.get(this, { loop: false, onChange: this.onChange, onChangeObj: this })
@@ -255,12 +264,8 @@ class UIScrollView extends UIView {
 			});
 	}
 
-	private findFinalPosition(event) {
-		let posX = event.stageX;
-		let offset = posX - this.touchPositionX;
-		let dir = offset > 0 ? 'right' : 'left';
-		let move: boolean = Math.abs(offset) > turnPageDistance;
-
+	//offset：通过按钮移动，不是通过手势移动操作
+	private moveTo(dir: string, move: boolean, offset: boolean = false) {
 		let count = this.listUIItems.length;
 		let curScrollH = Math.abs(this.container.x);
 		let gap = this.gap;
@@ -268,12 +273,18 @@ class UIScrollView extends UIView {
 		let w = width + gap;
 		let selectedIndex = 0;
 		if (dir == 'right') {
+			if (offset) {
+				curScrollH = Math.abs(curScrollH - w / 2);
+			}
 			selectedIndex = Math.ceil(curScrollH / w);
 			if (move) {
 				selectedIndex--;
 			}
 		}
 		else {
+			if (offset) {
+				curScrollH += w / 2;
+			}
 			selectedIndex = Math.floor(curScrollH / w);
 			if (move) {
 				selectedIndex++;
@@ -332,6 +343,14 @@ class UIScrollView extends UIView {
 	private setItemScale(uiItem: egret.DisplayObject, scale: number) {
 		uiItem.scaleX = scale * this._itemScale;
 		uiItem.scaleY = scale * this._itemScale;
+	}
+
+	/**
+	 * left
+	 * right
+	 */
+	public scrollToDirection(dir: string) {
+		this.scrollToPos(dir, true, true);
 	}
 
 }

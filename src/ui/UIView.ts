@@ -14,10 +14,13 @@ class UIView extends UIContainer {
 	}
 
 	public refresh() {
+		this.container.x = 0;
 		this.render();
 	}
 
-	public replaceAll(): void {
+	//长度一样的list
+	public replaceAll(source: any[]): void {
+		this.source = source;
 		let items = this.items;
 		let uiItems = this.listUIItems;
 		let count = uiItems.length;

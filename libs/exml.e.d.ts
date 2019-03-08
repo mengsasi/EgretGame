@@ -23,6 +23,10 @@ declare module panel{
 	}
 }
 declare module panel{
+	class ScrollPanelTestImageSkin extends eui.Skin{
+	}
+}
+declare module panel{
 	class TestPageSkin extends eui.Skin{
 	}
 }

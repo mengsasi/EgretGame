@@ -22,6 +22,7 @@
 		"resource/eui_skins/HSliderSkin.exml",
 		"resource/eui_skins/ItemRendererSkin.exml",
 		"resource/eui_skins/panel/ScrollPanelTest.exml",
+		"resource/eui_skins/panel/ScrollPanelTestImage.exml",
 		"resource/eui_skins/PanelSkin.exml",
 		"resource/eui_skins/panel/TestPage.exml",
 		"resource/eui_skins/ProgressBarSkin.exml",
