@@ -137,10 +137,11 @@ class UIScrollView extends UIView {
 		}
 		this.downTarget = event.target;
 		let stage = this.$stage;
-		this.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
+		stage.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
 		stage.addEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this, true);
 		this.addEventListener(egret.TouchEvent.TOUCH_CANCEL, this.onTouchCancel, this);
 		this.addEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemoveListeners, this);
+		stage.addEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
 		this.tempStage = stage;
 
 		this.lastPosition = -1;
@@ -172,10 +173,11 @@ class UIScrollView extends UIView {
 	private onRemoveListeners(): void {
 		this.resetTouch();
 		let stage = this.tempStage || this.$stage;
-		this.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
+		stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE, this.onTouchMove, this);
 		stage.removeEventListener(egret.TouchEvent.TOUCH_END, this.onTouchEnd, this, true);
 		this.removeEventListener(egret.TouchEvent.TOUCH_CANCEL, this.onTouchCancel, this);
 		this.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onRemoveListeners, this);
+		stage.removeEventListener(egret.TouchEvent.TOUCH_RELEASE_OUTSIDE, this.onTouchEnd, this);
 	}
 
 	private isScroll = false;
