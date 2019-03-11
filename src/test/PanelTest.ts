@@ -54,6 +54,7 @@ class PanelTest extends eui.Panel {
 	async asyncShow() {
 		
 		// this.groupScroll.validateNow();
+		// this.comScroll.isStageWidth = true;
 		this.updateUI();
 	}
 
