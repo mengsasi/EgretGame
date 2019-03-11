@@ -10,6 +10,7 @@ class PanelTest extends eui.Panel {
 		return PanelTest.instance;
 	}
 
+	private groupScroll: eui.Group;
 	protected comScroll: UIScrollView;
 
 	public constructor() {
@@ -51,6 +52,8 @@ class PanelTest extends eui.Panel {
 	}
 
 	async asyncShow() {
+		
+		// this.groupScroll.validateNow();
 		this.updateUI();
 	}
 

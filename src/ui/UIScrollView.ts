@@ -5,6 +5,12 @@ let scrollHDetectionDistance = 10;
 //移动距离大于此值，翻页
 let turnPageDistance = 20;
 
+/*
+ * this.percentWidth = 100;面板全屏宽度
+ * 不是全屏，需要加一个mask
+ * 第一次打开页面，需要父物体的Group,validateNow()一下
+ */
+
 class UIScrollView extends UIView {
 
 	private _itemScale: number = 0.7;
@@ -29,6 +35,21 @@ class UIScrollView extends UIView {
 	}
 	public set gap(value: number) {
 		this._gap = value;
+	}
+
+	/*
+	 * 是否是全屏板 panel.percentWidth = 100?
+	 */
+	private _isStageWidth: boolean = false;
+	public get isStageWidth(): boolean {
+		return this._isStageWidth;
+	}
+	public set isStageWidth(value: boolean) {
+		this._isStageWidth = value;
+	}
+
+	private get calculateWidth(): number {
+		return this._isStageWidth ? this.stageWidth : this.width;
 	}
 
 	public constructor() {
@@ -221,7 +242,7 @@ class UIScrollView extends UIView {
 		}
 		else {
 			let contentWidth = this.getContentWidth();
-			let limit = this.stageWidth - contentWidth;
+			let limit = this.calculateWidth - contentWidth;
 			if (scrollPos < limit) {
 				scrollPos = limit;
 			}
@@ -231,7 +252,7 @@ class UIScrollView extends UIView {
 
 	private scrollScaleChild() {
 		let _container = this.container;
-		let midX: number = Math.abs(_container.x) + this.stageWidth / 2;
+		let midX: number = Math.abs(_container.x) + this.calculateWidth / 2;
 		let count: number = _container.numChildren;
 		for (let i: number = 0; i < count; i++) {
 			let uiItem = _container.getChildAt(i);
@@ -323,9 +344,9 @@ class UIScrollView extends UIView {
 		return contentWidth;
 	}
 
-	//中间项和屏幕两边宽度
+	//中间项和屏幕/父物体两边宽度
 	private getPaddingStage() {
-		let stageWidth = this.stageWidth;
+		let stageWidth = this.calculateWidth;
 		let itemWidth = this.getItemWidth(1 + this._scaleOffset);
 		return (stageWidth - itemWidth) / 2;
 	}
