@@ -48,6 +48,17 @@ class UIScrollView extends UIView {
 		this._isStageWidth = value;
 	}
 
+	/*
+	 * 是否是用父物体高度一半，还是自己有Y
+	 */
+	private _isStageHeight: boolean = false;
+	public get isStageHeight(): boolean {
+		return this._isStageHeight;
+	}
+	public set isStageHeight(value: boolean) {
+		this._isStageHeight = value;
+	}
+
 	private get calculateWidth(): number {
 		return this._isStageWidth ? this.stageWidth : this.width;
 	}
@@ -105,7 +116,14 @@ class UIScrollView extends UIView {
 	protected updateDisplayPosition() {
 		let startPos = 0;
 		let gap = this._gap;
-		let halfStageHeight = this.parent.height / 2;
+		let useY;
+		if (this._isStageHeight) {
+			useY = this.parent.height / 2;
+		}
+		else {
+			useY = this.y;
+		}
+		let selfY = this.y;
 		let _container = this.container;
 		let paddingLeft = this.getPaddingStage();
 
@@ -114,7 +132,7 @@ class UIScrollView extends UIView {
 		for (let i = 0; i < numChildren; i++) {
 			let uiItem = this.listUIItems[i];
 			uiItem.x = startPos;
-			uiItem.y = halfStageHeight - uiItem.height * uiItem.scaleX / 2;
+			uiItem.y = useY - uiItem.height * uiItem.scaleX / 2;
 			startPos += uiItem.width * uiItem.scaleX;
 			startPos += gap;
 		}
@@ -220,7 +238,7 @@ class UIScrollView extends UIView {
 			}
 			let posX = event.stageX;
 			let offset = posX - this.touchPositionX;
-			let dir = offset > 0 ? 'right' : 'left';
+			let dir = offset > 0 ? 1 : -1;
 			let move: boolean = Math.abs(offset) > turnPageDistance;
 
 			this.scrollToPos(dir, move);
@@ -272,7 +290,7 @@ class UIScrollView extends UIView {
 	private tweenScroll: egret.Tween;
 	private containerPosX: number;
 
-	private scrollToPos(dir: string, move: boolean, offset: boolean = false) {
+	private scrollToPos(dir: number, move: boolean, offset: boolean = false) {
 		if (!this.$stage) {
 			return;
 		}
@@ -282,26 +300,28 @@ class UIScrollView extends UIView {
 		this.tweenScroll = egret.Tween.get(this, { loop: false, onChange: this.onChange, onChangeObj: this })
 			.to({ containerPosX: finalPos }, 200)
 			.call(function () {
+				// alien.Dispatcher.dispatch('UIScrollView_ScrollEnd', { index: scroll.getSelectedIndex() });
 				egret.Tween.removeTweens(scroll);
 				scroll.tweenScroll = null;
 			});
 	}
 
 	//offset：通过按钮移动，不是通过手势移动操作
-	private moveTo(dir: string, move: boolean, offset: boolean = false) {
+	private moveTo(dir: number, move: boolean, offset: boolean = false) {
 		let count = this.listUIItems.length;
 		let curScrollH = Math.abs(this.container.x);
 		let gap = this.gap;
 		let width = this.getItemWidth();
 		let w = width + gap;
 		let selectedIndex = 0;
-		if (dir == 'right') {
+		if (dir > 0) {
 			if (offset) {
 				curScrollH = Math.abs(curScrollH - w / 2);
 			}
 			selectedIndex = Math.ceil(curScrollH / w);
 			if (move) {
-				selectedIndex--;
+				//selectedIndex--;dir是right
+				selectedIndex = selectedIndex - dir;
 			}
 		}
 		else {
@@ -310,7 +330,8 @@ class UIScrollView extends UIView {
 			}
 			selectedIndex = Math.floor(curScrollH / w);
 			if (move) {
-				selectedIndex++;
+				//selectedIndex++;dir是left
+				selectedIndex = selectedIndex - dir;//负数，减是加
 			}
 		}
 		if (selectedIndex < 0) {
@@ -319,6 +340,7 @@ class UIScrollView extends UIView {
 		if (selectedIndex > count - 1) {
 			selectedIndex = count - 1;
 		}
+		//alien.Dispatcher.dispatch('UIScrollView_ScrollStart', { index: selectedIndex });
 		let scrollH = selectedIndex * w;
 		return -scrollH;
 	}
@@ -368,12 +390,28 @@ class UIScrollView extends UIView {
 		uiItem.scaleY = scale * this._itemScale;
 	}
 
+	public getSelectedIndex() {
+		let curScrollH = Math.abs(this.container.x);
+		let gap = this.gap;
+		let width = this.getItemWidth();
+		let w = width + gap;
+		return Math.ceil(curScrollH / w);
+	}
+
 	/**
-	 * left
-	 * right
+	 * left -1 -2
+	 * right 1 2 
 	 */
-	public scrollToDirection(dir: string) {
+	public scrollToDirection(dir: number) {
 		this.scrollToPos(dir, true, true);
+	}
+
+	/**
+	 * 滚动到指定索引 从0开始
+	 */
+	public scrollToIndex(index: number) {
+		let x = this.getSelectedIndex();
+		this.scrollToDirection(x - index);
 	}
 
 }
