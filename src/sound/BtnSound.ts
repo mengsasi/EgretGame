@@ -33,10 +33,10 @@ class BtnSound extends eui.Button {
 
 	protected childrenCreated(): void {
 		super.childrenCreated();
-		if (this.sourceId) {
-			let conf = musicConfigs.GetConfig(this.sourceId);
-			this.source = conf ? conf.filename : '';
-		}
+		//if (this.sourceId) {
+		//	let conf = musicConfigs.GetConfig(this.sourceId);
+		//	this.source = conf ? conf.filename : '';
+		//}
 		// if (this.source && this.source != '') {
 		// 	this.soundPlayer.Source = this.source;
 		// }
