@@ -25,13 +25,13 @@ class PanelTest extends eui.Panel {
 		let panel = this;
 		PanelTest.DEBUG_AddKeyDownListener('a', () => {
 
-			panel.comScroll.scrollToDirection('right');
+			panel.comScroll.scrollToDirection(1);
 
 		});
 
 		PanelTest.DEBUG_AddKeyDownListener('d', () => {
 
-			panel.comScroll.scrollToDirection('left');
+			panel.comScroll.scrollToDirection(-1);
 
 		});
 
@@ -52,7 +52,7 @@ class PanelTest extends eui.Panel {
 	}
 
 	async asyncShow() {
-		
+
 		// this.groupScroll.validateNow();
 		// this.comScroll.isStageWidth = true;
 		this.updateUI();

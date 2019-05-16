@@ -68,20 +68,20 @@ module Sound {
 		}
 
 		private async channelFade(channel: egret.SoundChannel, volume, duration = 500) {
+			// if (duration == 0) {
+			// 	if (volume == 0) {
+			// 		egret.Tween.removeTweens(channel);
+			// 		channel.stop();
+			// 	}
+			// }
+			// else {
+			// 	await alien.EgretUtils.getTweenPromise(
+			// 		egret.Tween
+			// 			.get(channel, null, null, true)
+			// 			.to({ volume }, duration)
+			// 	);
+			// }
 			if (duration == 0) {
-				if (volume == 0) {
-					egret.Tween.removeTweens(channel);
-					channel.stop();
-				}
-			}
-			else {
-				await alien.EgretUtils.getTweenPromise(
-					egret.Tween
-						.get(channel, null, null, true)
-						.to({ volume }, duration)
-				);
-			}
-			/*if (duration == 0) {
 				if (volume == 0) {
 					egret.Tween.removeTweens(channel);
 					channel.stop();
@@ -94,7 +94,7 @@ module Sound {
 					//tw.call(change, this);
 				}
 				fade();
-			}*/
+			}
 		}
 
 		private position: number = 0;

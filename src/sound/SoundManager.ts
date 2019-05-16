@@ -26,18 +26,18 @@ module Sound {
 		private soundFxVolume: number = 1;
 
 		private LoadData(): void {
-			let setting = LocalData.Instance.soundSetting;
-			if (setting) {
-				this.isMuteMusic = setting["isMuteMusic"] ? setting["isMuteMusic"] : false;
-				this.isMuteSoundFx = setting["isMuteSoundFx"] ? setting["isMuteSoundFx"] : false;
-			}
+			// let setting = LocalData.Instance.soundSetting;
+			// if (setting) {
+			// 	this.isMuteMusic = setting["isMuteMusic"] ? setting["isMuteMusic"] : false;
+			// 	this.isMuteSoundFx = setting["isMuteSoundFx"] ? setting["isMuteSoundFx"] : false;
+			// }
 		}
 
 		private Save(): void {
-			let setting = {};
-			setting["isMuteMusic"] = this.isMuteMusic;
-			setting["isMuteSoundFx"] = this.isMuteSoundFx;
-			LocalData.Instance.soundSetting = setting;
+			// let setting = {};
+			// setting["isMuteMusic"] = this.isMuteMusic;
+			// setting["isMuteSoundFx"] = this.isMuteSoundFx;
+			// LocalData.Instance.soundSetting = setting;
 		}
 
 		private UnSave(): void {
